@@ -24,6 +24,7 @@ public class PhoneListener extends PhoneStateListener {
                     // Intent restart = new Intent(this.module.getReactApplicationContextModule(), this.module.getClassActivity());
                     // restart.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     // this.module.getReactApplicationContextModule().startActivity(restart);
+
                     this.module.play();
                 }
                 break;

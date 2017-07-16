@@ -50,10 +50,6 @@ public class ReactNativeAudioStreamingModule extends ReactContextBaseJavaModule
     this.signal.stop();
   }
 
-  public void stop() {
-    this.signal.stop();
-  }
-
   public Signal getSignal() {
     return signal;
   }

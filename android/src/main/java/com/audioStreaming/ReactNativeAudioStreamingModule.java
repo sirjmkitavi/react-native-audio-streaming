@@ -45,7 +45,12 @@ public class ReactNativeAudioStreamingModule extends ReactContextBaseJavaModule
     return this.clsActivity;
   }
 
+  // Legacy code
   public void stopOncall() {
+    this.signal.stop();
+  }
+
+  public void stop() {
     this.signal.stop();
   }
 
@@ -89,6 +94,10 @@ public class ReactNativeAudioStreamingModule extends ReactContextBaseJavaModule
     this.shouldShowNotification =
         options.hasKey(SHOULD_SHOW_NOTIFICATION) && options.getBoolean(SHOULD_SHOW_NOTIFICATION);
     signal.setURLStreaming(streamingURL); // URL of MP3 or AAC stream
+    playInternal();
+  }
+
+  public void play() {
     playInternal();
   }
 

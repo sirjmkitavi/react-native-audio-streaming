@@ -187,7 +187,8 @@ public class Signal extends Service implements OnErrorListener,
         remoteViews.setOnClickPendingIntent(R.id.btn_streaming_notification_play, makePendingIntent(BROADCAST_PLAYBACK_PLAY));
         remoteViews.setOnClickPendingIntent(R.id.btn_streaming_notification_stop, makePendingIntent(BROADCAST_EXIT));
         notifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notifyManager.notify(NOTIFY_ME_ID, notifyBuilder.build());
+        // notifyManager.notify(NOTIFY_ME_ID, notifyBuilder.build());
+        startForeground(NOTIFY_ME_ID, notifyBuilder.build());
     }
 
     private PendingIntent makePendingIntent(String broadcast) {
@@ -196,8 +197,10 @@ public class Signal extends Service implements OnErrorListener,
     }
 
     public void clearNotification() {
-        if (notifyManager != null)
-            notifyManager.cancel(NOTIFY_ME_ID);
+        if (notifyManager != null) {
+            // notifyManager.cancel(NOTIFY_ME_ID);
+            stopForeground(true);
+        }
     }
 
     public void exitNotification() {

@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import {
     AppRegistry,
@@ -9,12 +8,14 @@ import {
     Platform,
     TouchableOpacity
 } from 'react-native';
-import { ReactNativeAudioStreaming, Player } from 'react-native-audio-streaming';
-
+import { ReactNativeAudioStreaming } from 'react-native-audio-stream';
+// const { ReactNativeAudioStreaming } = NativeModules;
+import { Player } from './player';
+//"react-native-audio-streaming": "^2.3.2"
 export default class App extends Component {
     constructor() {
         super();
-        this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         this.urls = [
             {
                 name: 'Shoutcast stream',
@@ -31,6 +32,22 @@ export default class App extends Component {
             {
                 name: 'MP3 stream',
                 url: 'http://www.stephaniequinn.com/Music/Canon.mp3'
+            },
+            {
+                name: 'http',
+                url: 'http://142.4.201.73:8575/;'
+            },
+	        {
+                name: 'radiotulstreaming',
+                url: 'http://191.232.165.170:8060/radiosanalfonso/;'
+            },
+            {
+                name: 'rtmp',
+                url: 'rtmp://vale.stweb.tv:1935/vale/live'
+            },
+            {
+                name: 'rtsp',
+                url: 'rtsp://r20057.smi.vmf.edge-apps.net/magma-apps/vorterix_radio1_high'
             }
         ];
 
@@ -40,6 +57,22 @@ export default class App extends Component {
         };
     }
 
+    componentDidMount() {
+        // this.subscription = DeviceEventEmitter.addListener(
+        //     'AudioBridgeEvent', (evt) => {
+        //         console.log('nuestro_log:', evt);
+        //     }
+        // );
+
+        ReactNativeAudioStreaming.getStatus((error, status) => {
+            (error) ? console.log(error) : this.setState(status)
+        });
+    }
+
+    componentWillUnmount() {
+        // this.subscription.remove();
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -47,12 +80,12 @@ export default class App extends Component {
                     dataSource={this.state.dataSource}
                     renderRow={(rowData) =>
                         <TouchableOpacity onPress={() => {
-                            this.setState({selectedSource: rowData.url, dataSource: this.ds.cloneWithRows(this.urls)});
-                            ReactNativeAudioStreaming.play(rowData.url, {});
+                            this.setState({ selectedSource: rowData.url, dataSource: this.ds.cloneWithRows(this.urls) });
+                            {/*ReactNativeAudioStreaming.play(rowData.url, {});*/ }
                         }}>
                             <View style={StyleSheet.flatten([
                                 styles.row,
-                                {backgroundColor: rowData.url == this.state.selectedSource ? '#3fb5ff' : 'white'}
+                                { backgroundColor: rowData.url == this.state.selectedSource ? '#3fb5ff' : 'white' }
                             ])}>
                                 <Text style={styles.icon}>▸</Text>
                                 <View style={styles.column}>

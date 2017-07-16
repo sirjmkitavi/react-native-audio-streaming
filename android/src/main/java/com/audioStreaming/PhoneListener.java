@@ -26,6 +26,7 @@ public class PhoneListener extends PhoneStateListener {
                     // this.module.getReactApplicationContextModule().startActivity(restart);
 
                     this.module.play();
+                    isPausadoEnLlamada = false;
                 }
                 break;
             case TelephonyManager.CALL_STATE_OFFHOOK:

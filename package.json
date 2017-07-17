@@ -14,7 +14,7 @@
     "web radio",
     "player"
   ],
-  "author": "Thibault Lenclos - David Rearte",
+  "author": "David Rearte",
   "license": "MIT",
   "main": "index.js",
   "scripts": {

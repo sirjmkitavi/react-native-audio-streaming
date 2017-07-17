@@ -22,6 +22,7 @@ import android.support.v4.app.TaskStackBuilder;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.widget.RemoteViews;
+import android.widget.ImageButton;
 
 import com.spoledge.aacdecoder.MultiPlayer;
 import com.spoledge.aacdecoder.PlayerCallback;
@@ -57,6 +58,7 @@ public class Signal extends Service implements OnErrorListener,
     private boolean isPreparingStarted = false;
     private EventsReceiver eventsReceiver;
     private ReactNativeAudioStreamingModule module;
+    private String songName = "";
 
     private TelephonyManager phoneManager;
     private PhoneListener phoneStateListener;
@@ -134,13 +136,23 @@ public class Signal extends Service implements OnErrorListener,
     }
 
     public void play() {
-        if (isConnected()) {
-            this.prepare();
-        } else {
+        if (!isConnected()) {
+            android.util.Log.d("player-signal", "play is connected: broadcast stopped");
             sendBroadcast(new Intent(Mode.STOPPED));
+            return;
         }
 
-        this.isPlaying = true;
+        this.prepare();
+        // this.isPlaying = true;
+        // updateNotification();
+
+        // if (isConnected()) {
+        //     this.prepare();
+        // } else {
+        //     sendBroadcast(new Intent(Mode.STOPPED));
+        // }
+
+        // this.isPlaying = true;
     }
 
     public void stop() {
@@ -151,7 +163,9 @@ public class Signal extends Service implements OnErrorListener,
             this.aacPlayer.stop();
         }
 
-        sendBroadcast(new Intent(Mode.STOPPED));
+        // android.util.Log.d("player-signal", "stop: broadcast stopped");
+        // sendBroadcast(new Intent(Mode.STOPPED));
+        // updateNotification();
     }
 
     public NotificationManager getNotifyManager() {
@@ -186,6 +200,7 @@ public class Signal extends Service implements OnErrorListener,
         notifyBuilder.setContentIntent(resultPendingIntent);
         remoteViews.setOnClickPendingIntent(R.id.btn_streaming_notification_play, makePendingIntent(BROADCAST_PLAYBACK_PLAY));
         remoteViews.setOnClickPendingIntent(R.id.btn_streaming_notification_stop, makePendingIntent(BROADCAST_EXIT));
+        // updateNotification();
         notifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         // notifyManager.notify(NOTIFY_ME_ID, notifyBuilder.build());
         startForeground(NOTIFY_ME_ID, notifyBuilder.build());
@@ -230,6 +245,21 @@ public class Signal extends Service implements OnErrorListener,
             e.printStackTrace();
             stop();
         }
+    }
+
+    public void updateNotification() {
+        if (remoteViews == null || notifyBuilder == null || notifyManager == null) {
+            return;
+        }
+
+        remoteViews.setImageViewResource(R.id.btn_streaming_notification_play, isPlaying ? android.R.drawable.ic_menu_close_clear_cancel : android.R.drawable.ic_media_play);
+
+        if (songName != null) {
+            remoteViews.setTextViewText(R.id.song_name_notification, songName);
+        }
+
+        notifyBuilder.setContent(remoteViews);
+        notifyManager.notify(NOTIFY_ME_ID, notifyBuilder.build());
     }
 
     @Override
@@ -295,6 +325,7 @@ public class Signal extends Service implements OnErrorListener,
     @Override
     public void playerStarted() {
         //  TODO
+        android.util.Log.d("player-signal", "playerStarted api callback");
     }
 
     @Override
@@ -302,18 +333,39 @@ public class Signal extends Service implements OnErrorListener,
         if (isPlaying) {
             this.isPreparingStarted = false;
             if (bufSizeMs < 500) {
-                this.isPlaying = false;
-                sendBroadcast(new Intent(Mode.BUFFERING_START));
+                // Evitamos que se envie muchas veces el mismo evento
+                if (this.isPlaying) {
+                    android.util.Log.d("player-signal", "buffer: buffering_start");
+                    this.isPlaying = false;
+                    sendBroadcast(new Intent(Mode.BUFFERING_START));
+                    updateNotification();
+                }
+                // this.isPlaying = false;
+                // sendBroadcast(new Intent(Mode.BUFFERING_START));
                 //buffering
             } else {
-                this.isPlaying = true;
-                sendBroadcast(new Intent(Mode.PLAYING));
+                // Evitamos que se envie muchas veces el mismo evento
+                if (!this.isPlaying) {
+                    android.util.Log.d("player-signal", "buffer: playing");
+                    this.isPlaying = true;
+                    sendBroadcast(new Intent(Mode.PLAYING));
+                    updateNotification();
+                }
+                // this.isPlaying = true;
+                // sendBroadcast(new Intent(Mode.PLAYING));
                 //playing
             }
         } else {
+            // Evitamos que se envie muchas veces el mismo evento
+            if (this.isPlaying) {
+                android.util.Log.d("player-signal", "buffer: buffering_start");
+                this.isPlaying = false;
+                sendBroadcast(new Intent(Mode.BUFFERING_START));
+                updateNotification();
+            }
+            // this.isPlaying = false;
+            // sendBroadcast(new Intent(Mode.BUFFERING_START));
             //buffering
-            this.isPlaying = false;
-            sendBroadcast(new Intent(Mode.BUFFERING_START));
         }
     }
 
@@ -333,9 +385,11 @@ public class Signal extends Service implements OnErrorListener,
         sendBroadcast(metaIntent);
 
         if (key != null && key.equals("StreamTitle") && remoteViews != null && value != null) {
-            remoteViews.setTextViewText(R.id.song_name_notification, value);
-            notifyBuilder.setContent(remoteViews);
-            notifyManager.notify(NOTIFY_ME_ID, notifyBuilder.build());
+            songName = value;
+            updateNotification();
+            // remoteViews.setTextViewText(R.id.song_name_notification, value);
+            // notifyBuilder.setContent(remoteViews);
+            // notifyManager.notify(NOTIFY_ME_ID, notifyBuilder.build());
         }
     }
 
@@ -348,9 +402,10 @@ public class Signal extends Service implements OnErrorListener,
     public void playerStopped(int perf) {
         this.isPlaying = false;
         this.isPreparingStarted = false;
+        android.util.Log.d("player-signal", "playerStopped: broadcast stopped");
         sendBroadcast(new Intent(Mode.STOPPED));
+        updateNotification();
         //  TODO
     }
-
 
 }

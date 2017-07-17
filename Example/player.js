@@ -39,9 +39,9 @@ class Player extends Component {
     componentDidMount() {
         this.subscription = DeviceEventEmitter.addListener(
             'AudioBridgeEvent', (evt) => {
-                // if (evt.status != METADATA_UPDATED) {
-                //     console.log('player', evt);
-                // }
+                if (evt.status != METADATA_UPDATED) {
+                    console.log('player', evt);
+                }
                 // We just want meta update for song name
                 if (evt.status === METADATA_UPDATED && evt.key === 'StreamTitle') {
                     this.setState({song: evt.value});

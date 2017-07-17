@@ -1,6 +1,14 @@
 
 # react-native-audio-streaming
 
+## Credits
+
+This is a fork of the react-native-audio-streaming
+
+https://www.npmjs.com/package/react-native-audio-streaming
+
+I have decided to fork it because is a great project that uses the metadata of the streaming, but there are may bugs and the author has neglected the original project
+
 ## Features
 
 - Background audio streaming of remote stream
@@ -65,7 +73,7 @@ In XCode, in the project navigator, select your project. Add `libReactNativeAudi
 2. Append the following lines to `android/settings.gradle`:
   	```
   	include ':react-native-audio-streaming'
-  	project(':react-native-audio-streaming').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-audio-streaming/android')
+  	project(':react-native-audio-streaming').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-audio-stream/android')
   	```
 3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
   	```
@@ -77,7 +85,7 @@ In XCode, in the project navigator, select your project. Add `libReactNativeAudi
 ### Playing sound (similar code used by the player UI)
 
 ```javascript
-import { ReactNativeAudioStreaming } from 'react-native-audio-streaming';
+import { ReactNativeAudioStreaming } from 'react-native-audio-stream';
 
 const url = "http://lacavewebradio.chickenkiller.com:8000/stream.mp3";
 ReactNativeAudioStreaming.pause();
@@ -127,8 +135,6 @@ See also the list of [contributors](https://github.com/tlenclos/react-native-aud
 Since symlink support is [still lacking](https://github.com/facebook/react-native/issues/637) on React Native, I use the [wml](https://github.com/wix/wml) cli tool created by the nice folks at wix.
 
 `wml add ~/react-native-audio-streaming ~/react-native-audio-streaming/Example/node_modules/react-native-audio-streaming`
-
-## [Changelog](https://github.com/tlenclos/react-native-audio-streaming/blob/master/CHANGELOG.md)
 
 ## License
 

@@ -23,27 +23,27 @@ If you are only looking to play local audio file with app in foreground, please 
 
 ## First installation step (applied for both iOS & Android)
 
-`$ npm install react-native-audio-streaming --save`
+`$ npm install react-native-audio-stream --save`
 
 ### Next installation steps for iOS (choose one of three options below)
 
 #### 1. Cocoapods installation
 
-1. add `pod 'RNAudioStreaming', :path => '../node_modules/react-native-audio-streaming'` to `Podfile`
+1. add `pod 'RNAudioStreaming', :path => '../node_modules/react-native-audio-stream'` to `Podfile`
 2. run `pod install`
 
 #### 2. Mostly automatic installation
 
-`$ react-native link react-native-audio-streaming`
+`$ react-native link react-native-audio-stream`
 
-Go to `node_modules` ➜ `react-native-audio-streaming` => `ios` => `Pods` and drag/drop `Pods.xcodeproj` to the Libraries folder in your XCode project.
+Go to `node_modules` ➜ `react-native-audio-stream` => `ios` => `Pods` and drag/drop `Pods.xcodeproj` to the Libraries folder in your XCode project.
 
 In XCode, in the project navigator, select your project. Add `libReactNativeAudioStreaming.a` and `libStreamingKit.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
 
 #### 3. Manual installation
 
 1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
-2. Go to `node_modules` ➜ `react-native-audio-streaming` => `ios`
+2. Go to `node_modules` ➜ `react-native-audio-stream` => `ios`
    - run `pod install` to download StreamingKit dependency
    - add `ReactNativeAudioStreaming.xcodeproj` to the Libraries folder in your XCode project
    - add `Pods/Pods.xcodeproj` to the Libraries folder in your XCode project
@@ -52,7 +52,7 @@ In XCode, in the project navigator, select your project. Add `libReactNativeAudi
 
 ### Final steps for iOS (required after doing any of three options above)
 
-1. Make sure `$(SRCROOT)/../node_modules/react-native-audio-streaming/ios` is added to your project's `Header Search Paths` within the `Build Settings` section.
+1. Make sure `$(SRCROOT)/../node_modules/react-native-audio-stream/ios` is added to your project's `Header Search Paths` within the `Build Settings` section.
 
 2. Update Info.plist file of your Xcode project and add audio background mode
 
@@ -99,7 +99,7 @@ For more information see the Example app.
 ### Player UI
 
 ```javascript
-import { Player } from 'react-native-audio-streaming';
+import { Player } from 'react-native-audio-stream';
 
 class PlayerUI extends Component {
   render() {

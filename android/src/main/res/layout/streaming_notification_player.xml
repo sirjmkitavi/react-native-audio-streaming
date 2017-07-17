@@ -3,7 +3,7 @@
         android:padding = "5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#000">
+        android:background="#F9F9F9">
         <ImageView
             android:id="@+id/streaming_icon"
             android:layout_width="40dp"
@@ -16,25 +16,27 @@
             android:layout_width = "match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/streaming_icon"
-            android:background="#000">
+            android:background="#F9F9F9">
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
-                <ImageButton
+                <ImageView
                     android:id="@+id/btn_streaming_notification_play"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="5dp"
+                    android:tint="#212121"
                     android:src="@android:drawable/ic_media_play" />
-                <ImageButton
+                <ImageView
                     android:id="@+id/btn_streaming_notification_stop"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:layout_toRightOf="@+id/btn_streaming_notification_play"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="10dp"
+                    android:tint="#212121"
                     android:src="@android:drawable/ic_menu_close_clear_cancel" />
                 <TextView
                     android:id="@+id/song_name_notification"
@@ -42,7 +44,7 @@
                     android:layout_height="match_parent"
                     android:gravity="left|center_vertical"
                     android:textAlignment="gravity"
-                    android:textColor="#fff"
+                    android:textColor="#212121"
                     />
             </LinearLayout>
         </RelativeLayout>

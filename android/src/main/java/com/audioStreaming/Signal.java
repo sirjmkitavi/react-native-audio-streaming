@@ -22,7 +22,6 @@ import android.support.v4.app.TaskStackBuilder;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.widget.RemoteViews;
-import android.widget.ImageButton;
 
 import com.spoledge.aacdecoder.MultiPlayer;
 import com.spoledge.aacdecoder.PlayerCallback;
@@ -310,12 +309,18 @@ public class Signal extends Service implements OnErrorListener,
         switch (what) {
             case MediaPlayer.MEDIA_ERROR_NOT_VALID_FOR_PROGRESSIVE_PLAYBACK:
                 //Log.v("ERROR", "MEDIA ERROR NOT VALID FOR PROGRESSIVE PLAYBACK "	+ extra);
+                android.util.Log.d("player-signal", "MEDIA_ERROR_NOT_VALID_FOR_PROGRESSIVE_PLAYBACK");
                 break;
             case MediaPlayer.MEDIA_ERROR_SERVER_DIED:
                 //Log.v("ERROR", "MEDIA ERROR SERVER DIED " + extra);
+                android.util.Log.d("player-signal", "MEDIA_ERROR_SERVER_DIED");
                 break;
             case MediaPlayer.MEDIA_ERROR_UNKNOWN:
+                android.util.Log.d("player-signal", "MEDIA_ERROR_UNKNOWN");
                 //Log.v("ERROR", "MEDIA ERROR UNKNOWN " + extra);
+                break;
+            default:
+                android.util.Log.d("player-signal", "unknown error code");
                 break;
         }
         sendBroadcast(new Intent(Mode.ERROR));
@@ -325,7 +330,7 @@ public class Signal extends Service implements OnErrorListener,
     @Override
     public void playerStarted() {
         //  TODO
-        android.util.Log.d("player-signal", "playerStarted api callback");
+        // android.util.Log.d("player-signal", "playerStarted api callback");
     }
 
     @Override

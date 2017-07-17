@@ -42,6 +42,12 @@ class Player extends Component {
                 if (evt.status != METADATA_UPDATED) {
                     console.log('player', evt);
                 }
+
+                if (evt.status === ERROR) {
+                    ReactNativeAudioStreaming.destroyNotification();
+                    alert('Ups! error');
+                }
+
                 // We just want meta update for song name
                 if (evt.status === METADATA_UPDATED && evt.key === 'StreamTitle') {
                     this.setState({song: evt.value});

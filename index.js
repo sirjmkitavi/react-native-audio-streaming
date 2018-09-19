@@ -24,7 +24,7 @@ const START_PREPARING = 'START_PREPARING'; // Android only
 const BUFFERING_START = 'BUFFERING_START'; // Android only
 
 // UI
-const iconSize = 60;
+const iconSize = 40;
 
 class Player extends Component {
     constructor(props) {
@@ -114,11 +114,12 @@ const styles = StyleSheet.create({
         right: 0,
         alignItems: 'center',
         flexDirection: 'row',
-        height: 80,
+        height: 45,
         paddingLeft: 10,
         paddingRight: 10,
-        borderColor: '#000033',
-        borderTopWidth: 1,
+        // borderColor: '#000033',
+        // borderTopWidth: 1,
+        backgroundColor: '#faac1c'
     },
     icon: {
         color: '#000',
@@ -131,7 +132,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         textAlign: 'center',
-        paddingTop: Platform.OS == 'ios' ? 10 : 0
+        // paddingTop: Platform.OS == 'ios' ? 10 : 0
     },
     textContainer: {
         flexDirection: 'column',

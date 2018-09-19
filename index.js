@@ -77,7 +77,7 @@ class Player extends Component {
         switch (this.state.status) {
             case PLAYING:
             case STREAMING:
-                icon = <Text style={styles.icon}></Text>॥</Text>;
+                icon = <Text style={styles.icon}>॥</Text>;
                 break;
             case PAUSED:
             case STOPPED:

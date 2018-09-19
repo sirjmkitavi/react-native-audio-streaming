@@ -77,7 +77,7 @@ class Player extends Component {
         switch (this.state.status) {
             case PLAYING:
             case STREAMING:
-                icon = <Text style={styles.icon}>॥</Text>;
+                icon = <Text style={[styles.icon, { fontSize: 20, lineHeight: 29, fontWeight: 'bold' }]}>॥</Text>;
                 break;
             case PAUSED:
             case STOPPED:
@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
     icon: {
         color: '#000',
         fontSize: 35,
+        fontWeight: 'bold',
         lineHeight: 33,
         borderColor: '#000033',
         borderWidth: 3,

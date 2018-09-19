@@ -77,7 +77,7 @@ class Player extends Component {
         switch (this.state.status) {
             case PLAYING:
             case STREAMING:
-                icon = <Text style={[styles.icon, { fontSize: 20, lineHeight: 29, fontWeight: 'bold' }]}>॥</Text>;
+                icon = <Text style={[styles.icon, { fontSize: 20, lineHeight: 29, fontWeight: '900' }]}>॥</Text>;
                 break;
             case PAUSED:
             case STOPPED:
@@ -89,7 +89,7 @@ class Player extends Component {
             case START_PREPARING:
                 icon = <ActivityIndicator
                     animating={true}
-                    style={{height: 40}}
+                    style={{height: 36}}
                     size="large"
                 />;
                 break;

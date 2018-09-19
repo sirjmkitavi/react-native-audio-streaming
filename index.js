@@ -77,7 +77,7 @@ class Player extends Component {
         switch (this.state.status) {
             case PLAYING:
             case STREAMING:
-                icon = <Text style={styles.icon}>॥</Text>;
+                icon = <Text style={styles.icon}></Text>॥</Text>;
                 break;
             case PAUSED:
             case STOPPED:
@@ -89,18 +89,15 @@ class Player extends Component {
             case START_PREPARING:
                 icon = <ActivityIndicator
                     animating={true}
-                    style={{height: 80}}
+                    style={{height: 40}}
                     size="large"
                 />;
                 break;
         }
 
         return (
-            <TouchableOpacity style={styles.container} onPress={this._onPress}>
+            <TouchableOpacity style={{ backgroundColor: '#faac1c'}} onPress={this._onPress}>
                 {icon}
-                <View style={styles.textContainer}>
-                    <Text style={styles.songName}>{this.state.song}</Text>
-                </View>
             </TouchableOpacity>
         );
     }
@@ -108,45 +105,35 @@ class Player extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        alignItems: 'center',
-        flexDirection: 'row',
-        height: 45,
-        paddingLeft: 10,
-        paddingRight: 10,
+        // position: 'absolute',
+        // bottom: 0,
+        // left: 0,
+        // right: 0,
+        // alignItems: 'center',
+        // flexDirection: 'row',
+        // justifyContent: 'center',
+        // height: 45,
+        // width: 50,
+        // paddingLeft: 10,
+        // paddingRight: 10,
         // borderColor: '#000033',
         // borderTopWidth: 1,
         backgroundColor: '#faac1c'
     },
     icon: {
         color: '#000',
-        fontSize: 26,
+        fontSize: 35,
+        lineHeight: 33,
         borderColor: '#000033',
-        borderWidth: 1,
-        borderRadius: iconSize / 2,
-        width: iconSize,
-        height: Platform.OS == 'ios' ? iconSize : 40,
+        borderWidth: 3,
+        borderRadius: 18,
+        width: 36,
+        height: 36,
         justifyContent: 'center',
         alignItems: 'center',
         textAlign: 'center',
-        // paddingTop: Platform.OS == 'ios' ? 10 : 0
     },
-    textContainer: {
-        flexDirection: 'column',
-        margin: 10
-    },
-    textLive: {
-        color: '#000',
-        marginBottom: 5
-    },
-    songName: {
-        fontSize: 20,
-        textAlign: 'center',
-        color: '#000'
-    }
+
 });
 
 export { Player, ReactNativeAudioStreaming }

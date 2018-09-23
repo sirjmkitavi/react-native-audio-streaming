@@ -10,6 +10,8 @@ import {
     Platform
 } from 'react-native';
 
+import { Icon } from 'react-native-elements';
+
 const { ReactNativeAudioStreaming } = NativeModules;
 
 // Possibles states
@@ -77,12 +79,12 @@ class Player extends Component {
         switch (this.state.status) {
             case PLAYING:
             case STREAMING:
-                icon = <Text style={[styles.icon, { fontSize: 20, lineHeight: 29, fontWeight: '900' }]}>॥</Text>;
+                icon = <Icon name='pause-circle-outline' size={40} />
                 break;
             case PAUSED:
             case STOPPED:
             case ERROR:
-                icon = <Text style={styles.icon}>▸</Text>;
+                icon = <Icon name='play-circle-outline' size={40} />
                 break;
             case BUFFERING:
             case BUFFERING_START:

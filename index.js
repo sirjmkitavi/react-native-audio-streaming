@@ -79,12 +79,12 @@ class Player extends Component {
         switch (this.state.status) {
             case PLAYING:
             case STREAMING:
-                icon = <Icon name='pause-circle-outline' size={40} />
+                icon = <Icon name='pause-circle-outline' size={45} color='#ffffff' />
                 break;
             case PAUSED:
             case STOPPED:
             case ERROR:
-                icon = <Icon name='play-circle-outline' size={40} />
+                icon = <Icon name='play-circle-outline' size={45} color='#ffffff' />
                 break;
             case BUFFERING:
             case BUFFERING_START:
